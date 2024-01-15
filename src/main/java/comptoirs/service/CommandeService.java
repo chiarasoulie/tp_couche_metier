@@ -155,13 +155,12 @@ public class CommandeService {
         }
         commande.setEnvoyeele(LocalDate.now());
         for (Ligne l : commande.getLignes()){
-            l.getProduit().getUnitesEnStock() -= l.getQuantite();
-            l.getProduit().getUnitesCommandees() -= l.getQuantite();
-
-
-
-
+             var p = l.getProduit();
+            p.setUnitesEnStock(l.getProduit().getUnitesEnStock() - l.getQuantite());
+            p.setUnitesCommandees(l.getProduit().getUnitesCommandees() - l.getQuantite());
         }
+        return commande;
+
 
 
     }
